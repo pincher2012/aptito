@@ -9,7 +9,7 @@ define('BASE_DIR', dirname(__DIR__));
 define('VIEWS_DIR', BASE_DIR . '/src/views');
 
 
-$app = new \Aptito\Application($connection);
+$app = new \Aptito\Application();
 
 $dbParams = require_once BASE_DIR . '/db.php';
 $app->register(new DatabaseConnectionProvider(), ['db.params' => $dbParams]);

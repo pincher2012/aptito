@@ -29,6 +29,7 @@ class Application extends Container
      */
     public function __construct()
     {
+        parent::__construct();
         $this->request = new Request();
         $this->setExceptionHandler();
     }

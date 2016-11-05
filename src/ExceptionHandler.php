@@ -21,9 +21,9 @@ class ExceptionHandler
     /**
      * Функция обработки ошибок
      *
-     * @param \Throwable $exception исключение
+     * @param \Exception $exception исключение
      *
-     * @throws \Throwable
+     * @throws \Exception
      */
     public function handle(\Exception $exception)
     {
@@ -45,6 +45,7 @@ class ExceptionHandler
     {
         http_response_code(404);
         require_once VIEWS_DIR . '/404.php';
+
         exit;
     }
 }

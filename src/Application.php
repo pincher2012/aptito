@@ -1,12 +1,14 @@
 <?php
 
 namespace Aptito;
+
 use Aptito\exceptions\NotFoundException;
+use Pimple\Container;
 
 /**
  * Класс приложения
  */
-class Application
+class Application extends Container
 {
     /**
      * Список маршрутов
@@ -60,7 +62,7 @@ class Application
 
         list($controllerClassName, $action) = $this->routes[$route];
         $controller = new $controllerClassName();
-        $controller->$action($this->request);
+        $controller->$action($this, $this->request);
     }
 
     /**

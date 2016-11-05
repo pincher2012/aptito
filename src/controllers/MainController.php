@@ -2,6 +2,8 @@
 
 namespace Aptito\controllers;
 
+use Aptito\Application;
+use Aptito\models\services\OrdersService;
 use Aptito\Request;
 
 /**
@@ -12,10 +14,15 @@ class MainController
     /**
      * Обрабатывает главную страницу
      *
-     * @param Request $request
+     * @param Application $app
+     * @param Request     $request
      */
-    public function index(Request $request)
+    public function index(Application $app, Request $request)
     {
+        /** @var OrdersService $ordersService */
+        $ordersService = $app['orders'];
+        $orders = $ordersService->getAll();
+
         require_once VIEWS_DIR . '/index.php';
     }
 }

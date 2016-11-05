@@ -1,6 +1,7 @@
 <?php
 
 namespace Aptito\controllers;
+
 use Aptito\Request;
 
 /**

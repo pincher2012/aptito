@@ -7,7 +7,7 @@ use Aptito\models\DateTimeValidator;
 class DateTimeValidatorTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @param bool $expected
+     * @param bool  $expected
      * @param mixed $date
      *
      * @dataProvider providerValidate
@@ -27,21 +27,37 @@ class DateTimeValidatorTest extends PHPUnit_Framework_TestCase
     public function providerValidate()
     {
         return [
-            'when date is positive integer then return true' => [
+            'when date is positive integer then return true'          => [
                 true,
                 1
             ],
-            'when date is string then return true' => [
+            'when date is string then return true'                    => [
                 true,
                 '1'
             ],
-            'when date is negative integer then return false' => [
+            'when date is null then return true'                      => [
+                true,
+                null
+            ],
+            'when date is negative integer then return false'         => [
                 false,
                 -1
             ],
-            'when date is not integer then return false' => [
+            'when date is not null and not integer then return false' => [
                 false,
-                null
+                false
+            ],
+            'when date is string then return false'                   => [
+                false,
+                'a'
+            ],
+            'when date is float then return false'                    => [
+                false,
+                1.1
+            ],
+            'when date is folat string then return false'             => [
+                false,
+                '1.1'
             ],
         ];
     }

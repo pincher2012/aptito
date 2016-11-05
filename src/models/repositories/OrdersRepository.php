@@ -27,24 +27,20 @@ class OrdersRepository
     /**
      * Возвращает последние заказы
      *
-     * @param int $limit количество возвращаемых записей
-     *
      * @return array
      */
-    public function findLastOrders($limit = 20)
+    public function findAll()
     {
         $sql = '
-          SELECT oi.*, o.date FROM orders AS o
+          SELECT oi.*, o.date, p.name FROM orders AS o
           JOIN order_items AS oi ON o.id = oi.order_id
+          JOIN plates AS p ON p.id = oi.plate_id
           WHERE o.date <= :now 
           ORDER BY o.date DESC
-          LIMIT :limit
           ';
 
-        $now = time();
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(':now', $now, \PDO::PARAM_INT);
-        $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindParam(':now', time(), \PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -58,18 +54,70 @@ class OrdersRepository
      *
      * @return array
      */
-    public function findOrdersByDiapason($dateFrom, $dateTo)
+    public function findByDiapason($dateFrom, $dateTo)
     {
         $sql = '
-          SELECT oi.*, o.date FROM orders AS o
+          SELECT oi.*, o.date, p.name FROM orders AS o
           JOIN order_items AS oi ON o.id = oi.order_id
-          WHERE o.date <= :dateTo and o.date > :dateFrom 
+          JOIN plates AS p ON p.id = oi.plate_id
+          WHERE o.date <= :dateTo AND o.date > :dateFrom AND o.date <= :now 
           ORDER BY o.date DESC
           ';
 
         $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':now', time(), \PDO::PARAM_INT);
         $stmt->bindParam(':dateTo', $dateTo, \PDO::PARAM_INT);
         $stmt->bindParam(':dateFrom', $dateFrom, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Возвращает заказы с заданным временем
+     *
+     * @param int $dateFrom дата начала
+     *
+     * @return array
+     */
+    public function findSince($dateFrom)
+    {
+        $sql = '
+          SELECT oi.*, o.date, p.name FROM orders AS o
+          JOIN order_items AS oi ON o.id = oi.order_id
+          JOIN plates AS p ON p.id = oi.plate_id
+          WHERE o.date > :dateFrom AND o.date <= :now 
+          ORDER BY o.date DESC
+          ';
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':now', time(), \PDO::PARAM_INT);
+        $stmt->bindParam(':dateFrom', $dateFrom, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Возвращает заказы с заданным временем
+     *
+     * @param int $dateTo дата окончания
+     *
+     * @return array
+     */
+    public function findUntil($dateTo)
+    {
+        $sql = '
+          SELECT oi.*, o.date, p.name FROM orders AS o
+          JOIN order_items AS oi ON o.id = oi.order_id
+          JOIN plates AS p ON p.id = oi.plate_id
+          WHERE o.date <= :dateTo AND o.date <= :now
+          ORDER BY o.date DESC
+          ';
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':now', time(), \PDO::PARAM_INT);
+        $stmt->bindParam(':dateTo', $dateTo, \PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);

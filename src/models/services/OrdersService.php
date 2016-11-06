@@ -74,6 +74,26 @@ class OrdersService
     }
 
     /**
+     * Вычисляет и возвращает суммарные показатели
+     *
+     * @param array $orders
+     *
+     * @return array
+     */
+    public function calculateTotal(array $orders)
+    {
+        $result = [
+            'count' => count($orders),
+            'qty'   => array_sum(array_column($orders, 'qty')),
+            'price' => array_sum(array_column($orders, 'price')),
+            'tax'   => array_sum(array_column($orders, 'tax')),
+            'net'   => array_sum(array_column($orders, 'net')),
+        ];
+
+        return $result;
+    }
+
+    /**
      * Валидирует массив дат в формате timestamp
      *
      * @param array $array массив дат

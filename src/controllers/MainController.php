@@ -22,6 +22,7 @@ class MainController
         /** @var OrdersService $ordersService */
         $ordersService = $app['orders'];
         $orders = $ordersService->getAll();
+        $total = $ordersService->calculateTotal($orders);
 
         require_once VIEWS_DIR . '/index.php';
     }

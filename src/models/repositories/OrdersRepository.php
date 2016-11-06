@@ -32,7 +32,8 @@ class OrdersRepository
     public function findAll()
     {
         $sql = '
-          SELECT oi.*, o.date, p.name FROM orders AS o
+          SELECT oi.*, o.date, p.name, (oi.price - oi.tax) AS net  
+          FROM orders AS o
           JOIN order_items AS oi ON o.id = oi.order_id
           JOIN plates AS p ON p.id = oi.plate_id
           WHERE o.date <= :now 
@@ -57,7 +58,8 @@ class OrdersRepository
     public function findByDiapason($dateFrom, $dateTo)
     {
         $sql = '
-          SELECT oi.*, o.date, p.name FROM orders AS o
+          SELECT oi.*, o.date, p.name, (oi.price - oi.tax) AS net
+          FROM orders AS o
           JOIN order_items AS oi ON o.id = oi.order_id
           JOIN plates AS p ON p.id = oi.plate_id
           WHERE o.date <= :dateTo AND o.date > :dateFrom AND o.date <= :now 
@@ -83,7 +85,8 @@ class OrdersRepository
     public function findSince($dateFrom)
     {
         $sql = '
-          SELECT oi.*, o.date, p.name FROM orders AS o
+          SELECT oi.*, o.date, p.name, (oi.price - oi.tax) AS net
+          FROM orders AS o
           JOIN order_items AS oi ON o.id = oi.order_id
           JOIN plates AS p ON p.id = oi.plate_id
           WHERE o.date > :dateFrom AND o.date <= :now 
@@ -108,7 +111,8 @@ class OrdersRepository
     public function findUntil($dateTo)
     {
         $sql = '
-          SELECT oi.*, o.date, p.name FROM orders AS o
+          SELECT oi.*, o.date, p.name, (oi.price - oi.tax) AS net
+          FROM orders AS o
           JOIN order_items AS oi ON o.id = oi.order_id
           JOIN plates AS p ON p.id = oi.plate_id
           WHERE o.date <= :dateTo AND o.date <= :now

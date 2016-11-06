@@ -1,0 +1,23 @@
+{
+  "name": "aptito.test",
+  "authors": [
+    "Alexander Busygin <pincher2012@yandex.ru>"
+  ],
+  "description": "NetElement test task",
+  "main": "",
+  "license": "proprietary",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pikaday": "^1.5.1",
+    "moment": "^2.15.2",
+    "moment-timezone": "^0.5.9"
+  }
+}

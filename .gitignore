@@ -2,3 +2,5 @@
 build/
 vendor/
 /db.php
+/bower_components/
+/env.php

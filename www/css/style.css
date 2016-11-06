@@ -33,7 +33,7 @@ body {
     margin-right: 21px;
 }
 
-.b-filter-date span {
+.b-filter-date label {
     line-height: 42px;
     display: inline-block;
     font-size: 20px;
@@ -56,6 +56,10 @@ body {
     overflow: hidden;
 }
 
+.b-filter-date__input.error {
+    background: #ffcccc;
+}
+
 .b-filter-date__input input {
     border: 0;
     width: 100px;
@@ -63,6 +67,7 @@ body {
     padding: 0 9px;
     outline: none;
     font-size: 16px;
+    background: transparent;
 }
 
 .b-filter-date__clear {

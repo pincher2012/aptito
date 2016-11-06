@@ -8,6 +8,7 @@ require_once '../vendor/autoload.php';
 define('BASE_DIR', dirname(__DIR__));
 define('VIEWS_DIR', BASE_DIR . '/src/views');
 
+require_once BASE_DIR . '/env.php';
 
 $app = new \Aptito\Application();
 

@@ -6,8 +6,7 @@ function Datepicker(item, callback) {
         $input = $item.find($item.data('input')),
         $inputContainer = $item.find($item.data('input-container')),
         $clear = $item.find($item.data('clear')),
-        $trigger = $item.find($item.data('trigger')),
-        timezone = $item.data('timezone');
+        $trigger = $item.find($item.data('trigger'));
 
     $item.find('label').on('click', function (e) {
         e.preventDefault();
@@ -61,6 +60,7 @@ function OrdersTable(item) {
         $item = $(item),
         $dataContainer = $item.find($item.data('container')),
         $totalContainer = $item.find($item.data('total')),
+        timezone = $item.data('timezone'),
         requestData = {};
 
     self.update = function () {
@@ -72,7 +72,7 @@ function OrdersTable(item) {
 
         if (dateFrom) {
             [day, month, year] = dateFrom.split('/');
-            requestData['dateFrom'] = moment.tz([year, month, day], 'Europe/Berlin').unix();
+            requestData['dateFrom'] = moment.tz([year, month, day], timezone).unix();
         }
 
         if (dateTo) {

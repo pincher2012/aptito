@@ -28,7 +28,6 @@
                  data-input-container=".b-filter-date__input"
                  data-clear=".b-filter-date__clear"
                  data-trigger=".b-filter-date__calendar"
-                 data-timezone="<?php echo getenv('TIMEZONE') ?>"
             >
                 <label for="date_from">Date from</label>
                 <div class="b-filter-date__input">
@@ -42,7 +41,6 @@
                  data-input-container=".b-filter-date__input"
                  data-clear=".b-filter-date__clear"
                  data-trigger=".b-filter-date__calendar"
-                 data-timezone="<?php echo getenv('TIMEZONE') ?>"
             >
                 <label for="date_to">Date to</label>
                 <div class="b-filter-date__input">
@@ -63,6 +61,7 @@
     <table class="b-orders js-orders"
            data-container="tbody"
            data-total="tfoot"
+           data-timezone="<?php echo getenv('TIMEZONE') ?>"
     >
         <thead>
         <tr class="b-orders__header">

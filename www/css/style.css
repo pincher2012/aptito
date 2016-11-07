@@ -142,11 +142,6 @@ body {
     background: #fbaf3f;
     height: 50px;
     padding: 0 20px;
-    cursor: pointer;
-}
-
-.b-orders__header-cell-background:hover {
-    opacity: .9;
 }
 
 .b-orders__header-cell-background_first {

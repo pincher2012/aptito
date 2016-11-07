@@ -99,9 +99,14 @@ body {
     border-radius: 5px;
     border: 1px solid #f74f06;
     height: 48px;
-    line-height: 48px;
     margin-top: 21px;
     font-size: 18px;
+}
+
+.b-warning span {
+    display: table-cell;
+    vertical-align: middle;
+    height: 48px;
 }
 
 .b-warning i {
@@ -126,36 +131,42 @@ body {
 .b-orders__header-cell {
     height: 50px;
     text-align: left;
+    vertical-align: middle;
 }
 
 .b-orders__header-cell_money {
     text-align: right;
 }
 
-.b-orders__header-cell div {
+.b-orders__header-cell-background{
     background: #fbaf3f;
     height: 50px;
-    line-height: 50px;
     padding: 0 20px;
     cursor: pointer;
 }
 
-.b-orders__header-cell div:hover {
+.b-orders__header-cell-background:hover {
     opacity: .9;
 }
 
-.b-orders__header-cell_first div {
+.b-orders__header-cell-background_first {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     height: 100%;
 }
 
-.b-orders__header-cell_last div {
+.b-orders__header-cell-background_last {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     height: 100%;
     text-align: right;
     background: #fa9d12;
+}
+
+.b-orders__header-cell-center {
+    vertical-align: middle;
+    display: table-cell;
+    height: 50px;
 }
 
 .b-orders__row {
@@ -170,6 +181,7 @@ body {
 
 .b-orders__cell_money {
     text-align: right;
+    white-space: nowrap;
 }
 
 .b-orders__cell_last {
@@ -183,4 +195,46 @@ body {
 
 .clear {
     clear: both;
+}
+
+@media only screen and (max-width: 1600px) {
+    .b-content {
+        width: 1200px;
+    }
+
+    .b-filter {
+        margin-left: 400px;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+    .b-content {
+        width: 960px;
+    }
+
+    .b-filter {
+        margin-left: 300px;
+    }
+
+    .b-warning {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .b-content {
+        width: 700px;
+    }
+
+    .b-filter {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .b-title {
+        font-size: 24px;
+        float: none;
+        text-align: center;
+        margin-bottom: 20px;
+    }
 }

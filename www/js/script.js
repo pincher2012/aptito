@@ -103,7 +103,7 @@ function OrdersTable(item) {
     };
 
     function formatMoney(n) {
-        return '$ ' + parseInt(n).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+        return '$&nbsp;' + parseInt(n).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
     }
 
     function renderRow(row) {

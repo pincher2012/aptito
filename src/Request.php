@@ -22,7 +22,7 @@ class Request
     /**
      * Возвращает get параметр запроса
      *
-     * @param string $param имя параметра
+     * @param string $param   имя параметра
      * @param mixed  $default значение по умолчанию
      *
      * @return mixed

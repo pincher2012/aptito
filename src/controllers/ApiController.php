@@ -34,7 +34,7 @@ class ApiController
                 'status'  => 'success',
                 'data'    => [
                     'orders' => $orders,
-                    'total' => $ordersService->calculateTotal($orders)
+                    'total'  => $ordersService->calculateTotal($orders)
                 ],
                 'message' => null
             ];

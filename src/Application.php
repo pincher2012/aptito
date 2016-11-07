@@ -34,7 +34,6 @@ class Application extends Container
         $this->setExceptionHandler();
     }
 
-
     /**
      * Связывает маршурт и действие в контроллере
      *

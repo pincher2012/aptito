@@ -29,6 +29,6 @@ class Request
      */
     public function get($param, $default = null)
     {
-        return array_key_exists($param, $_GET) ? $_GET[$param] : $default;
+        return array_key_exists($param, $_GET) ? urldecode($_GET[$param]) : $default;
     }
 }

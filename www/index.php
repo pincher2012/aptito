@@ -17,6 +17,6 @@ $app->register(new DatabaseConnectionProvider(), ['db.params' => $dbParams]);
 $app->register(new OrdersServiceProvider());
 
 $app->route('/', 'MainController:index')
-    ->route('/app', 'ApiController:api');
+    ->route('/api', 'ApiController:api');
 
 $app->run();

@@ -58,15 +58,15 @@ class OrdersService
     public function getByDate($dateFrom, $dateTo)
     {
         $this->validateDates([$dateFrom, $dateTo]);
-        if ($dateFrom !== null && $dateTo !== null) {
+        if (!$this->isEmpty($dateFrom) && !$this->isEmpty($dateTo)) {
             return $this->repository->findByDiapason($dateFrom, $dateTo);
         }
 
-        if ($dateTo === null) {
+        if ($this->isEmpty($dateTo)) {
             return $this->repository->findSince($dateFrom);
         }
 
-        if ($dateFrom === null) {
+        if ($this->isEmpty($dateFrom)) {
             return $this->repository->findUntil($dateTo);
         }
 
@@ -106,5 +106,15 @@ class OrdersService
         if (count($result) === 0) {
             throw new ValidationException('Не верный формат даты');
         }
+    }
+
+    /**
+     * @param $dateFrom
+     *
+     * @return bool
+     */
+    private function isEmpty($dateFrom)
+    {
+        return $dateFrom === '' || $dateFrom === null;
     }
 }

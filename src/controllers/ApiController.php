@@ -3,6 +3,7 @@
 namespace Aptito\controllers;
 
 use Aptito\Application;
+use Aptito\exceptions\ValidationException;
 use Aptito\models\services\OrdersService;
 use Aptito\Request;
 
@@ -21,12 +22,30 @@ class ApiController
     {
         /** @var OrdersService $ordersService */
         $ordersService = $app['orders'];
-        $orders = $ordersService->getByDate(
-            $request->get('dateFrom'),
-            $request->get('dateTo')
-        );
-
         header('Content-Type: application/json');
-        echo json_encode($orders);
+
+        try {
+            $orders = $ordersService->getByDate(
+                $request->get('dateFrom'),
+                $request->get('dateTo')
+            );
+
+            $result = [
+                'status'  => 'success',
+                'data'    => [
+                    'orders' => $orders,
+                    'total' => $ordersService->calculateTotal($orders)
+                ],
+                'message' => null
+            ];
+        } catch (ValidationException $e) {
+            $result = [
+                'status'  => 'error',
+                'data'    => null,
+                'message' => $e->getMessage()
+            ];
+        }
+
+        echo json_encode($result);
     }
 }

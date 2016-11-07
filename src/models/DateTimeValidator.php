@@ -16,7 +16,7 @@ class DateTimeValidator
      */
     public function validate($date)
     {
-        if ($date === null) {
+        if ($date === null || $date === '') {
             return true;
         }
 

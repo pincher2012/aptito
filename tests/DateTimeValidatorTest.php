@@ -39,6 +39,10 @@ class DateTimeValidatorTest extends PHPUnit_Framework_TestCase
                 true,
                 null
             ],
+            'when date empty string then return true'                 => [
+                true,
+                ''
+            ],
             'when date is negative integer then return false'         => [
                 false,
                 -1

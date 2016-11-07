@@ -32,16 +32,16 @@ class OrdersRepository
     public function findAll()
     {
         $sql = '
-          SELECT oi.*, o.date, p.name, (oi.price - oi.tax) AS net  
+          SELECT oi.*, p.name, (oi.price - oi.tax) AS net  
           FROM orders AS o
           JOIN order_items AS oi ON o.id = oi.order_id
           JOIN plates AS p ON p.id = oi.plate_id
-          WHERE o.date <= :now 
-          ORDER BY o.date DESC
+          WHERE oi.date <= :now 
+          ORDER BY oi.date DESC
           ';
 
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(':now', time(), \PDO::PARAM_INT);
+        $stmt->bindParam(':now', gmmktime(), \PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -58,16 +58,16 @@ class OrdersRepository
     public function findByDiapason($dateFrom, $dateTo)
     {
         $sql = '
-          SELECT oi.*, o.date, p.name, (oi.price - oi.tax) AS net
+          SELECT oi.*, p.name, (oi.price - oi.tax) AS net
           FROM orders AS o
           JOIN order_items AS oi ON o.id = oi.order_id
           JOIN plates AS p ON p.id = oi.plate_id
-          WHERE o.date <= :dateTo AND o.date > :dateFrom AND o.date <= :now 
-          ORDER BY o.date DESC
+          WHERE oi.date <= :dateTo AND oi.date > :dateFrom AND oi.date <= :now 
+          ORDER BY oi.date DESC
           ';
 
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(':now', time(), \PDO::PARAM_INT);
+        $stmt->bindParam(':now', gmmktime(), \PDO::PARAM_INT);
         $stmt->bindParam(':dateTo', $dateTo, \PDO::PARAM_INT);
         $stmt->bindParam(':dateFrom', $dateFrom, \PDO::PARAM_INT);
         $stmt->execute();
@@ -85,16 +85,16 @@ class OrdersRepository
     public function findSince($dateFrom)
     {
         $sql = '
-          SELECT oi.*, o.date, p.name, (oi.price - oi.tax) AS net
+          SELECT oi.*, p.name, (oi.price - oi.tax) AS net
           FROM orders AS o
           JOIN order_items AS oi ON o.id = oi.order_id
           JOIN plates AS p ON p.id = oi.plate_id
-          WHERE o.date > :dateFrom AND o.date <= :now 
-          ORDER BY o.date DESC
+          WHERE oi.date > :dateFrom AND oi.date <= :now 
+          ORDER BY oi.date DESC
           ';
 
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(':now', time(), \PDO::PARAM_INT);
+        $stmt->bindParam(':now', gmmktime(), \PDO::PARAM_INT);
         $stmt->bindParam(':dateFrom', $dateFrom, \PDO::PARAM_INT);
         $stmt->execute();
 
@@ -111,16 +111,16 @@ class OrdersRepository
     public function findUntil($dateTo)
     {
         $sql = '
-          SELECT oi.*, o.date, p.name, (oi.price - oi.tax) AS net
+          SELECT oi.*, p.name, (oi.price - oi.tax) AS net
           FROM orders AS o
           JOIN order_items AS oi ON o.id = oi.order_id
           JOIN plates AS p ON p.id = oi.plate_id
-          WHERE o.date <= :dateTo AND o.date <= :now
-          ORDER BY o.date DESC
+          WHERE oi.date <= :dateTo AND oi.date <= :now
+          ORDER BY oi.date DESC
           ';
 
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(':now', time(), \PDO::PARAM_INT);
+        $stmt->bindParam(':now', gmmktime(), \PDO::PARAM_INT);
         $stmt->bindParam(':dateTo', $dateTo, \PDO::PARAM_INT);
         $stmt->execute();
 

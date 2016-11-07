@@ -60,7 +60,10 @@
             discounts and tax exempt as well as surcharges and gratuity.
         </span>
     </div>
-    <table class="b-orders">
+    <table class="b-orders js-orders"
+           data-container="tbody"
+           data-total="tfoot"
+    >
         <thead>
         <tr class="b-orders__header">
             <th class="b-orders__header-cell b-orders__header-cell_first">
